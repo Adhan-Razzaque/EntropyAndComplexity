@@ -13,5 +13,9 @@ UCLASS()
 class ENTROPYANDCOMPLEXITY_API AEntropyAndComplexityGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
+
+public:
+	AEntropyAndComplexityGameModeBase();
 	
+
 };
