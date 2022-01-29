@@ -57,6 +57,7 @@ ExportedObj/
 *.mp3.meta
 *.blend.meta
 *.physicMaterial.meta
+*.meta
 
 # Unity3D generated file on crash reports
 sysinfo.txt
