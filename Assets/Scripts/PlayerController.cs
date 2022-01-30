@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityStandardAssets.Characters.FirstPerson;
 public class PlayerController : MonoBehaviour
 {
@@ -32,11 +34,20 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private Vector3 RecordedMoveToPosition; //the position of the vault end point in world space to move the player to
     private Vector3 RecordedStartPosition; // position of player right before vault
+
     // Start is called before the first frame update
     void Start()
     {
+        
         rbfps = GetComponent<RigidbodyFirstPersonController>();
         rb = GetComponent<Rigidbody>();
+        
+        var Manager = CharacterManager.Instance;
+        if (Manager)
+        {
+            gameObject.transform.SetPositionAndRotation(Manager.playerLocation, Manager.playerRotation);
+        }
+        
     }
 
     // Update is called once per frame
@@ -105,6 +116,20 @@ public class PlayerController : MonoBehaviour
             }
         }
         
+        // Pause Menu
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("PauseMenu");
+        }
     }
-  
+
+    private void OnDestroy()
+    {
+        var Manager = CharacterManager.Instance;
+        if (!Manager) return;
+        
+        var GameObject = gameObject;
+        Manager.playerLocation = GameObject.transform.position;
+        Manager.playerRotation = GameObject.transform.rotation;
+    }
 }
