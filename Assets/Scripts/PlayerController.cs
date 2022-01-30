@@ -41,13 +41,7 @@ public class PlayerController : MonoBehaviour
         
         rbfps = GetComponent<RigidbodyFirstPersonController>();
         rb = GetComponent<Rigidbody>();
-        
-        var Manager = CharacterManager.Instance;
-        if (Manager)
-        {
-            gameObject.transform.SetPositionAndRotation(Manager.playerLocation, Manager.playerRotation);
-        }
-        
+
     }
 
     // Update is called once per frame
@@ -121,15 +115,5 @@ public class PlayerController : MonoBehaviour
         {
             SceneManager.LoadScene("PauseMenu");
         }
-    }
-
-    private void OnDestroy()
-    {
-        var Manager = CharacterManager.Instance;
-        if (!Manager) return;
-        
-        var GameObject = gameObject;
-        Manager.playerLocation = GameObject.transform.position;
-        Manager.playerRotation = GameObject.transform.rotation;
     }
 }

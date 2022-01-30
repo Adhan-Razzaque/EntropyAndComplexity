@@ -82,7 +82,29 @@ namespace UnityStandardAssets.Characters.FirstPerson
             canrotate = true;
             m_RigidBody = GetComponent<Rigidbody>();
             m_Capsule = GetComponent<CapsuleCollider>();
+            
+            var Manager = CharacterManager.Instance;
+
+            if (Manager)
+            {
+                cam.transform.localRotation = Manager.cameraRotation;
+                var PlayerTransform = transform;
+                PlayerTransform.position = Manager.playerLocation;
+                PlayerTransform.localRotation = Manager.playerRotation;
+            }
+
             mouseLook.Init (transform, cam.transform);
+        }
+
+        private void OnDestroy()
+        {
+            var Manager = CharacterManager.Instance;
+            if (!Manager) return;
+        
+            var GameObject = gameObject;
+            Manager.playerLocation = GameObject.transform.position;
+            Manager.playerRotation = GameObject.transform.localRotation;
+            Manager.cameraRotation = cam.transform.localRotation;
         }
 
 

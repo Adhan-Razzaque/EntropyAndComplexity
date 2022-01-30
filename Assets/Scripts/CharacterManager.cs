@@ -9,10 +9,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
     [SerializeField]
     private CharacterManager characterManagerPrefab;
     
-
+    // Maintain state of RigidBody
     public Vector3 playerLocation;
-
     public Quaternion playerRotation;
+
+    // Maintain state of camera component
+    public Quaternion cameraRotation;
     
 
 
@@ -21,7 +23,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // PrefabUtility.RevertObjectOverride(Instance, InteractionMode.AutomatedAction);
         // Reset to default values, there must be a better way to do this
         playerLocation = Vector3.zero;
-        playerRotation = Quaternion.identity;
+        playerRotation = cameraRotation = Quaternion.identity;
     }
 
     private void Awake()
