@@ -38,7 +38,7 @@ public class AutomaticDoor : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             playerIsHere = false;
-            other.GetComponent<Animator>().SetTrigger(AnimationEndEvent);
+            movingDoor.GetComponent<Animator>().SetTrigger(AnimationEndEvent);
         }
     }
 }
