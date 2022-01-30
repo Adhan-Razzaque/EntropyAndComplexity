@@ -8,6 +8,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void Start()
         {
             GetComponent<Renderer>().material.color = Color.white;
+            Cursor.lockState = CursorLockMode.None;
         }
 
         private void OnMouseEnter()
