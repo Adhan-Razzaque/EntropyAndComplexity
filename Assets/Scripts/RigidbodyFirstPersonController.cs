@@ -10,13 +10,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [Serializable]
         public class MovementSettings
         {
-            public float ForwardSpeed = 16.0f;   // Speed when walking forward
-            public float BackwardSpeed = 8.0f;  // Speed when walking backwards
-            public float StrafeSpeed = 8.0f;    // Speed when walking sideways
-            public float SpeedInAir = 16.0f;   // Speed when onair
+            public float ForwardSpeed = 32.0f;   // Speed when walking forward
+            public float BackwardSpeed = 16.0f;  // Speed when walking backwards
+            public float StrafeSpeed = 16.0f;    // Speed when walking sideways
+            public float SpeedInAir = 32.0f;   // Speed when on air
             public float JumpForce = 60f;
 
-            [HideInInspector] public float CurrentTargetSpeed = 8f;
+            [HideInInspector] public float CurrentTargetSpeed = 32f;
             
 #if !MOBILE_INPUT
             private bool m_Running;
@@ -54,9 +54,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public Vector3 relativevelocity;
 
         public DetectObs detectGround;
-
-
-        public bool Wallrunning;
 
 
 
@@ -139,7 +136,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             inputVector = Vector3.ClampMagnitude(inputVector, 1);
 
             //grounded
-            if ((Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon) && m_IsGrounded && !Wallrunning)
+            if ((Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon) && m_IsGrounded)
             {
                 if (Input.GetAxisRaw("Vertical") > 0.3f)
                 {
@@ -160,7 +157,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             }
             //inair
-            if ((Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon) && !m_IsGrounded  && !Wallrunning)
+            if ((Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon) && !m_IsGrounded)
             {
                 if (Input.GetAxisRaw("Vertical") > 0.3f)
                 {
