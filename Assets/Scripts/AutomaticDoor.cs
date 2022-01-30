@@ -4,27 +4,20 @@ public class AutomaticDoor : MonoBehaviour
 {
     public GameObject movingDoor;
     
-    private bool isOpening;
     private static readonly int AnimationSendEvent = Animator.StringToHash("AnimationSendEvent");
     private static readonly int AnimationEndEvent = Animator.StringToHash("AnimationEndEvent");
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter(Collider Other)
     {
-        isOpening = false;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
+        if (Other.gameObject.CompareTag("Player"))
         {
             movingDoor.GetComponent<Animator>().SetTrigger(AnimationSendEvent);
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider Other)
     {
-        if (other.gameObject.tag == "Player")
+        if (Other.gameObject.CompareTag("Player"))
         {
             movingDoor.GetComponent<Animator>().SetTrigger(AnimationEndEvent);
         }

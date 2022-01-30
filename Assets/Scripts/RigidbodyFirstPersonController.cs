@@ -147,6 +147,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             mouseLook.CamGoBackAll(transform, cam.transform);
 
         }
+        
         private void FixedUpdate()
         {
             GroundCheck();
@@ -205,8 +206,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         public void NormalJump()
         {
+            // Calculate jump direction
+            Vector3 JumpForce = m_RigidBody.rotation * new Vector3(0f, movementSettings.JumpForce, 0f);
+
             m_RigidBody.velocity = new Vector3(m_RigidBody.velocity.x, 0f, m_RigidBody.velocity.z);
-            m_RigidBody.AddForce(new Vector3(0f, movementSettings.JumpForce, 0f), ForceMode.Impulse);
+            m_RigidBody.AddForce(JumpForce, ForceMode.Impulse);
+            // m_RigidBody.AddForce(new Vector3(0f, movementSettings.JumpForce, 0f), ForceMode.Impulse);
         }
         public void SwitchDirectionJump()
         {
